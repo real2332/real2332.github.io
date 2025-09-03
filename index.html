@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Помогите Самеду - Сбор на лечение аутизма</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #0098db, #0088fb);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 Z" fill="rgba(255,255,255,0.07)"/></svg>');
+            background-size: 100% 100%;
+        }
+        
+        .azerbaijan-flag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(to bottom, #0098db 33%, #E00034 33%, #E00034 66%, #0098db 66%, #0098db 66%, #009e49 66%);
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        
+        .azerbaijan-flag::after {
+            content: '★';
+            position: absolute;
+            color: white;
+            font-size: 10px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.3rem;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        .heart-icon {
+            color: #e74c3c;
+            margin: 0 8px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .photo-section {
+            flex: 1;
+            min-width: 320px;
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .photo-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .photo-placeholder {
+            width: 100%;
+            height: 380px;
+            background: linear-gradient(135deg, #e6e9f0 0%, #eef1f5 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            border: 3px solid #0098db;
+            position: relative;
+        }
+        
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .donation-section {
+            flex: 1;
+            min-width: 320px;
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .donation-section:hover {
+            transform: translateY(-5px);
+        }
+        
+        .donation-section h2 {
+            color: #2c3e50;
+            margin-bottom: 1.8rem;
+            text-align: center;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .donation-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #0098db, #0088fb);
+            border-radius: 2px;
+        }
+        
+        .progress-container {
+            margin-bottom: 2.2rem;
+        }
+        
+        .progress-bar {
+            background-color: #ecf0f1;
+            border-radius: 50px;
+            height: 22px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+        }
+        
+        .progress {
+            background: linear-gradient(135deg, #009e49, #008a3c);
+            height: 100%;
+            width: 5.6%;
+            border-radius: 50px;
+            transition: width 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg, 
+                rgba(255, 255, 255, 0.2) 25%, 
+                transparent 25%, 
+                transparent 50%, 
+                rgba(255, 255, 255, 0.2) 50%, 
+                rgba(255, 255, 255, 0.2) 75%, 
+                transparent 75%, 
+                transparent
+            );
+            z-index: 1;
+            background-size: 50px 50px;
+            animation: move 2s linear infinite;
+            border-radius: 50px;
+        }
+        
+        @keyframes move {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+        
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .progress-text .raised {
+            color: #009e49;
+        }
+        
+        .progress-text .goal {
+            color: #0098db;
+        }
+        
+        .donation-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .donation-option {
+            background: #f8f9fa;
+            border: 2px solid #e1e6eb;
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .donation-option:hover {
+            border-color: #0098db;
+            background: #eaf2f8;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 152, 219, 0.15);
+        }
+        
+        .donation-option.selected {
+            background: #0098db;
+            color: white;
+            border-color: #0098db;
+            box-shadow: 0 5px 15px rgba(0, 152, 219, 0.25);
+        }
+        
+        .custom-amount {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .currency-symbol {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7f8c8d;
+            font-weight: 600;
+            z-index: 1;
+        }
+        
+        .custom-amount input {
+            flex: 1;
+            padding: 1rem 1rem 1rem 2.5rem;
+            border: 2px solid #e1e6eb;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-amount input:focus {
+            border-color: #0098db;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 152, 219, 0.2);
+        }
+        
+        .custom-amount button {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-left: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        .custom-amount button:hover {
+            background: #0098db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        }
+        
+        .donate-button {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #E00034, #c4002b);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 6px 15px rgba(224, 0, 52, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .donate-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(224, 0, 52, 0.4);
+            background: linear-gradient(135deg, #c4002b, #E00034);
+        }
+        
+        .donate-button:active {
+            transform: translateY(1px);
+        }
+        
+        .requisites {
+            background: white;
+            border-radius: 15px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .requisites:hover {
+            transform: translateY(-5px);
+        }
+        
+        .requisites h2 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .requisites h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #0098db, #0088fb);
+            border-radius: 2px;
+        }
+        
+        .requisites-content {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 5px solid #0098db;
+        }
+        
+        .requisites-content p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #34495e;
+        }
+        
+        .requisites-content .bank-info {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed #ccc;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #1a2530);
+            color: white;
+            text-align: center;
+            padding: 3rem 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        footer p {
+            margin-bottom: 1rem;
+            opacity: 0.85;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-item i {
+            color: #0098db;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            header p {
+                font-size: 1.1rem;
+            }
+            
+            .azerbaijan-flag {
+                width: 50px;
+                height: 25px;
+                top: 10px;
+                right: 10px;
+            }
+            
+            .donation-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .custom-amount {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .custom-amount button {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="azerbaijan-flag"></div>
+        <h1>Помогите Самеду <i class="heart-icon fas fa-heart"></i> победить аутизм</h1>
+        <p>Ваше пожертвование может изменить жизнь этого ребенка. Поддержите Самеда в борьбе с болезнью.</p>
+    </header>
+    
+    <div class="container">
+        <div class="main-content">
+            <div class="photo-section">
+                <h2>Самед Юсифли</h2>
+                <div class="photo-placeholder">
+                    <!-- Фотография Самеда -->
+                    <img src="https://i.ibb.co/0SQsLjN/photo-2025-09-03-21-26-37.jpg" alt="Самед Юсифли">
+                </div>
+                <p>8 лет, Баку, Азербайджан</p>
+            </div>
+            
+            <div class="donation-section">
+                <h2>Сделать пожертвование</h2>
+                
+                <div class="progress-container">
+                    <div class="progress-text">
+                        <span class="raised">Собрано: $830</span>
+                        <span class="goal">Цель: $14,880</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="progress-text">
+                        <span>5.6% достигнуто</span>
+                        <span>Осталось: $14,050</span>
+                    </div>
+                </div>
+                
+                <div class="donation-options">
+                    <div class="donation-option" data-amount="10">$10</div>
+                    <div class="donation-option" data-amount="25">$25</div>
+                    <div class="donation-option" data-amount="50">$50</div>
+                    <div class="donation-option" data-amount="100">$100</div>
+                    <div class="donation-option selected" data-amount="250">$250</div>
+                    <div class="donation-option" data-amount="500">$500</div>
+                </div>
+                
+                <div class="custom-amount">
+                    <span class="currency-symbol">$</span>
+                    <input type="number" placeholder="Другая сумма" id="custom-amount-input">
+                    <button onclick="selectCustomAmount()">OK</button>
+                </div>
+                
+                <button class="donate-button">Пожертвовать сейчас</button>
+            </div>
+        </div>
+        
+        <div class="requisites">
+            <h2>Реквизиты для помощи</h2>
+            <div class="requisites-content">
+                <p>Банковская карта: 1234 5678 9012 3456</p>
+                <p>Получатель: Юсифли Самед</p>
+                <p>Gmail: somedhelp@gmail.com</p>
+                <p></p>
+                <div class="bank-info">
+                    <p>Банк: Kapital Bank</p>
+                    <p>SWIFT: AZRTAZ22</p>
+                    <p>ИНН: 1234567890</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="story-section">
+            <h2>История Самеда</h2>
+            <p>Это Юсифли Самед и он тяжело болен аутизмом. Жизнь у этого ребенка сложилась очень плохо, он живет без отца и его воспитывает одна лишь мать. Тяжко воспитывать сына в одиночку, тем более когда он "особенный". Ей приходится пахать на 3 работах ради сына, но она не сдается!</p>
+            <p>Мы надеемся, что Самед тоже не будет сдаваться и будет бороться со своей болезнью до конца! Мы надеемся так же и на вашу поддержку в материальной форме. Реквизиты будут указаны ниже.</p>
+            <p>Всем спасибо, кто потратит хоть цент или хотя бы прочитал это! Спасибо за поддержку.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Помощь Самеду Юсифли. Все права защищены.</p>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>help@samed.az</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>+994 (12) 345-67-89</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Баку, Азербайджан</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Выбор суммы пожертвования
+        const donationOptions = document.querySelectorAll('.donation-option');
+        let selectedAmount = 250; // Значение по умолчанию
+        
+        donationOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                donationOptions.forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedAmount = parseInt(this.getAttribute('data-amount'));
+                document.getElementById('custom-amount-input').value = '';
+            });
+        });
+        
+        // Обработка пользовательской суммы
+        function selectCustomAmount() {
+            const customAmount = document.getElementById('custom-amount-input').value;
+            if (customAmount && !isNaN(customAmount) && parseInt(customAmount) > 0) {
+                donationOptions.forEach(opt => opt.classList.remove('selected'));
+                selectedAmount = parseInt(customAmount);
+            }
+        }
+        
+        // Обработка кнопки пожертвования
+        document.querySelector('.donate-button').addEventListener('click', function() {
+            alert(`Спасибо за ваше пожертвование в размере $${selectedAmount}!`);
+            // Здесь обычно будет перенаправление на платежную систему
+        });
+        
+        // Анимация прогресс-бара
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBar = document.querySelector('.progress');
+            setTimeout(() => {
+                progressBar.style.width = '5.6%';
+            }, 500);
+        });
+    </script>
+</body>
+</html>
